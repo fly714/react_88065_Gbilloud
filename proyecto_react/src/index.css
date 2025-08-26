@@ -24,18 +24,41 @@ a:hover {
 }
 
 body {
-  color: #2E2E2E;
-  background-color: #F5F5DC;
+  color: #fff;
+  background-image: url('./assets/fondo.png');
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  align-items: center;
+  justify-content: center;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
+.containerBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  width: fit-content;
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: center;
+
+}
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
 }
 
 button {

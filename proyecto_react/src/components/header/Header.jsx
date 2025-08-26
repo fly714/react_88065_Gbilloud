@@ -8,18 +8,16 @@ import logo from '../../assets/logo.png'
 
 function Header() {
   return (
-    <div className='navbar'>
+    <div className='barHeader'>
       <Logo logo={logo}/>
-
-      <Navbar menu="Inicio"/>
-      <Navbar menu="Productos"/>
-      <Navbar menu="Ofertas/Promociones"/>
-      <Navbar menu="Contacto"/>
-      <Navbar menu="Nosotros"/>
-
-      
-      <Cartwidget carrito={carrito}/> 
-      
+      <div className='navbar'>
+        <Navbar menu="Inicio"/>
+        <Navbar menu="Productos"/>
+        <Navbar menu="Ofertas/Promociones"/>
+        <Navbar menu="Contacto"/>
+        <Navbar menu="Nosotros"/>
+      </div>
+      <Cartwidget carrito={carrito}/>
     </div>
   )
 }
