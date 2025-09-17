@@ -1,11 +1,8 @@
-import React from 'react'
+import carrito from '../../assets/carrito.png'
 
-function Cartwidget({carrito}) {
-  return (
-    <div>
-      <img src={carrito} alt="Carrito de compras" className='carrito'/>
-    </div>
-  )
+function Cartwidget() {
+  return <img src={carrito} alt="Carrito de compras" className='carrito'/>
+
 }
 
 export default Cartwidget

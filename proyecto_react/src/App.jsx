@@ -1,25 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from 'react'
+import {Routes, Route } from 'react-router-dom'
 import './App.css'
-import Body from './components/body/Body.jsx'
-import Header from './components/header/Header.jsx'
+import Layout from './layouts/Layout.jsx'
+import Home from './pages/Home.jsx'
+import Nosotros from './pages/Nosotros.jsx'
+import Contacto from './pages/Contacto.jsx'
+import Error404 from './pages/Error.jsx'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function App() {
   
   return (
     <>
-      <Header/>
-      <Body/>
-        
+      <Routes>
+        <Route path='/' element={<Layout/>}>
+          <Route index element={<Home/>}/>
+          <Route path='nosotros' element={<Nosotros/>}/>
+          <Route path='contacto' element={<Contacto/>}/>
+          <Route path='*' element={<Error404/>}/>
+        </Route>
+      </Routes>
+      <ToastContainer />
+    </> 
       
-      {/*<div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>*/}
-      
-    </>
   )
 }
 

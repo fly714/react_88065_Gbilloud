@@ -1,25 +1,38 @@
-import React from 'react'
-import Navbar from './Navbar.jsx'
+
 import Logo from './Logo.jsx'
 import Cartwidget from './Cartwidget.jsx'
-import carrito from '../../assets/carrito.png'
-import logo from '../../assets/logo.png'
-
+import { Link } from 'react-router-dom'
+import "../../App.css"
 
 function Header() {
   return (
-    <div className='barHeader'>
-      <Logo logo={logo}/>
-      <div className='navbar'>
-        <Navbar menu="Inicio"/>
-        <Navbar menu="Productos"/>
-        <Navbar menu="Ofertas/Promociones"/>
-        <Navbar menu="Contacto"/>
-        <Navbar menu="Nosotros"/>
+
+    <header className='barHeader'>
+      <div> 
+        <Link to="/">
+          <Logo/>
+        </Link>  
       </div>
-      <Cartwidget carrito={carrito}/>
-    </div>
-  )
+ 
+      <nav className='navBar'>
+            <ul>
+                <li>
+                    <Link className='menu' to={"/"}>Inicio</Link>
+                </li>
+                <li>
+                    <Link className='menu' to={"/contacto"}>Contacto</Link>
+                </li>
+                <li>
+                    <Link className='menu' to={"/nosotros"}>Nosotros</Link>
+                </li>
+            </ul>
+        </nav>
+        
+      
+      <Cartwidget/>
+    </header>
+    
+  );
 }
 
 export default Header

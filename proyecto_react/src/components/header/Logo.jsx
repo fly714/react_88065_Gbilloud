@@ -1,11 +1,8 @@
-import React from 'react'
+import logo from '../../assets/logo.png'
 
-function Logo({logo}) {
-  return (
-    <div>
-      <img src={logo} alt="Logo del negocio" className='logo' />
-    </div>
-  )
+function Logo() {
+  return <img src={logo} alt="Logo del negocio" className='logo'/>
+    
 }
 
 export default Logo
