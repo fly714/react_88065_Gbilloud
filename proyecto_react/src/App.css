@@ -1,13 +1,46 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 .barHeader{
   display: flex;
-  flex-direction: row;  
-  justify-content:center;
+  flex-direction: row;
+  align-items: center;  
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 20px;
+  gap: 16px;
+}
+
+.cartWrap{
+  width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+
+.navBar{
+  display: flex;
+  gap: 40px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+}
+
+.navBar a{
+  transition: color .2s ease;
+  text-decoration: none;
+  color: #fff;
+}
+
+.navBar a:hover{
+  color: #61dafb;
+  text-shadow: 0 0 5px #61dafb;
 }
 
 div.navbar{
@@ -63,11 +96,9 @@ ul {
 }
 
 .logo {
-  width: 200px;
+  width: 120px;
   height: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: block;
   padding: 0;
   margin: 0;
   transition: transform 0.3s ease, filter 0.3s ease;
@@ -75,6 +106,12 @@ ul {
 .logo:hover {
   transform: scale(1.15);
   filter: drop-shadow(0 0 15px #ffffff) drop-shadow(0 0 30px #61dafb);
+}
+
+.logoWrap{
+  display: flex;
+  align-items: center;
+  width: 160px;
 }
 
 @keyframes logo-spin {

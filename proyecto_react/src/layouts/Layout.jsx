@@ -1,8 +1,8 @@
-import { NavLink, Outlet, Link } from "react-router-dom"
+import { useLocation, Outlet, Link } from "react-router-dom"
 import Logo from '../components/elements/Logo.jsx'
 import CartWidget from '../components/elements/CartWidget.jsx'
 
-import { useLocation } from "react-router-dom";
+
 
 function Layout() {
 
@@ -10,9 +10,9 @@ function Layout() {
     console.log("[ROUTE]", loc.pathname);
 
   return (
-    <>
+    <div className = 'opacity'>
         <header className='barHeader'>
-            <div> 
+            <div className='logoWrap'> 
                 <Link to="/">
                   <Logo/>
                 </Link>  
@@ -24,7 +24,7 @@ function Layout() {
                 <Link to="/contacto">Contacto</Link>
             </nav>
 
-            <div>
+            <div className='cartWrap'>
                 <CartWidget/>
             </div> 
         </header>
@@ -37,8 +37,8 @@ function Layout() {
             © MateyTeCo
         </footer>
                 
-    </>
-    )         
+    </div>
+  )         
 }
 
 export default Layout

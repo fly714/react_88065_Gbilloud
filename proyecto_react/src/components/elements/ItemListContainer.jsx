@@ -1,11 +1,13 @@
 
 import { useState, useEffect } from 'react'
 import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore';
-
+import {useCart} from './CartItems.jsx'
 
 function ItemListContainer({categoria}) {
+ 
   const db = getFirestore();
-
+  const {addItem} = useCart();
+  
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

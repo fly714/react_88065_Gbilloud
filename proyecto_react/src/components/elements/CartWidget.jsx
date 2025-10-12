@@ -1,14 +1,14 @@
 import {Link} from 'react-router-dom'
 import carrito from '../../assets/carrito.png'
-import {useCart} from '../elements/CartItems.jsx'
+import {useCart} from './CartItems.jsx'
 
 function CartWidget() {
-  const { cartItems } = useCart();
+  const { items } = useCart();
   
   return (
     <Link to="/carrito">
         <img src={carrito} alt="Icono de carrito de compras" className='carrito'/>
-        {cartItems.length > 0 && <span className="cart-count">{cartItems.length}</span>}
+        {items.length > 0 && <span className="cart-count">{items.length}</span>}
     </Link>
   )
 }
