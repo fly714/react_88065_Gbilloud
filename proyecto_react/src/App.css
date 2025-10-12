@@ -49,7 +49,9 @@ ul {
   filter: drop-shadow(0 0 15px #ffffff) drop-shadow(0 0 30px #61dafb);
 }
 
-.itemListContainer{
+
+
+.mainButtons{
   display: grid;
   gap: 20px;
   justify-items: center;

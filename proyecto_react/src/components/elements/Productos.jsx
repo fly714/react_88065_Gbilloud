@@ -1,24 +1,20 @@
+import { useSearchParams } from "react-router-dom";
+import ItemListContainer from "./ItemListContainer";
 import MainButtons from "./MainButtons";
 
+function Productos() {
+  const [params] = useSearchParams();
+  const categoria = params.get('categoria') || 'Todos';
 
-function Productos({prod}) {
- 
   return (
-    <div className='product'>
-      {prod.map((p) => (
-        <div key={p.id}>
-
-          <h2>{p.nombre}</h2>
-          <p>{p.caracteristica}</p>
-          <h3>${p.precio}</h3>
-          <img className= 'imagenes' src={p.imagen} alt={p.nombre}/>
-            <div>
-              <MainButtons producto={p} />
-              
-            </div>
-        </div>
-      ))}
+  <>
+    <div>
+      <h1 style={{color: 'blue'}}>Productos</h1>
     </div>
-  );
+    <MainButtons/>
+    <ItemListContainer categoria={categoria}/>
+  </>
+  )
 }
+    
 export default Productos

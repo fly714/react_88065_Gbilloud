@@ -93,6 +93,94 @@ button .boton {
   height: auto;
 }
 
+.gridCards {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+/* Tarjeta */
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,.04);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+/* Imagen sin recorte (contain dentro de un marco prolijo) */
+.imgWrap {
+  aspect-ratio: 4 / 3;            /* cambiá a 1/1 si querés cuadradas */
+  width: 100%;
+  background: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.imgWrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;            /* <- no recorta */
+  object-position: center;
+  display: block;
+}
+
+/* Cuerpo */
+.cardBody {
+  padding: 12px 14px 14px;
+}
+.cardTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 6px 0 4px;
+  line-height: 1.25rem;
+}
+.cardDesc {
+  color: #4b5563;
+  font-size: .92rem;
+  margin: 0 0 10px;
+  min-height: 2.6em;              /* estabiliza altura si hay textos distintos */
+}
+
+/* Footer con precio + botón */
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.price {
+  font-weight: 800;
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
+/* Botón */
+.btnPrimary {
+  border: 1px solid #111827;
+  background: #111827;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter .15s ease, transform .05s ease;
+}
+.btnPrimary:hover { filter: brightness(1.05); }
+.btnPrimary:active { transform: translateY(1px); }
+
+/* (Opcional) modo oscuro suave si usás dark theme del navegador */
+@media (prefers-color-scheme: dark) {
+  .card { background: #0f1216; border-color: #1f2937; }
+  .cardDesc { color: #9ca3af; }
+  .imgWrap { background: #12161c; }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

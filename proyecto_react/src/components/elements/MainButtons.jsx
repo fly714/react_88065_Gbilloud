@@ -1,18 +1,38 @@
+import { Link, useLocation } from 'react-router-dom';
 
-import Button from './Button.jsx'
-import {toast} from 'react-toastify';
+const categorias = ["Todos", "Mates", "Bombillas", "Yerbas", "Tes", "Termos"];
 
-function MainButtons({producto}) {
-  const handleClick = () => {
-    console.log('Producto agregado al carrito', producto);
-    toast.success(`${producto.nombre} agregado al carrito!`); 
-  };
+function MainButtons() {
+  const {search} = useLocation();
+  const params = new URLSearchParams(search);
+  const activa = params.get("categoria") || "Todos";
+
+  const base = "/productos";
 
   return (
-    <>
-      <button onClick={handleClick}>Agregar al carrito</button>
-    </>
+     <nav style={{display:"flex", gap:8, flexWrap:"wrap", marginBottom:12}}>
+      {categorias.map((cat) => {
+        const to = cat === "Todos" ? "/productos" : `/productos?categoria=${encodeURIComponent(cat)}`;
+        const selected = activa === cat;
+        return (
+          <Link
+            key={cat}
+            to={to}
+            style={{
+              padding:"8px 12px",
+              borderRadius:10,
+              border:"1px solid #ccc",
+              textDecoration:"none",
+              fontWeight:600,
+              background: selected ? "#eee" : "transparent"
+            }}
+          >
+            {cat}
+          </Link>
+        );
+      })}
+    </nav>
   );
 }
-
+    
 export default MainButtons

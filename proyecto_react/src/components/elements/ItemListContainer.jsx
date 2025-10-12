@@ -1,40 +1,79 @@
 
 import { useState, useEffect } from 'react'
-import Productos from './Productos.jsx'
-import productos from './productos.js'
+import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore';
 
 
-function ItemListContainer() {
+function ItemListContainer({categoria}) {
+  const db = getFirestore();
 
-  const [prod, setProd] = useState([]);
-  const [categoria, setCategoria] = useState("todos");
+  const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect (()=>{
-    const fetchProductos = new Promise ((resolve) => {
-      setTimeout(() => {
-        resolve(productos);
-      }, 2000);
-    });
+    let alive = true;
 
-    fetchProductos.then((res) => setProd(res));
-  },[]);
+    (async () =>{
+      setLoading(true);
+      setError(null);
+      try {
+        const baseRef = collection(db, 'productos');
+        const ref = categoria && categoria !== 'Todos' ?
+          query(baseRef, where('categoria', '==', categoria)) 
+          : baseRef;
+        
+        const snapshot = await getDocs(ref);
+        const data = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
+        if (alive) setProductos(data);
+      } catch (err) {
+        if (alive) setError(err.message);
+      } finally {
+        if (alive) setLoading(false);
+      }
+    })();
+   
 
-    const productosFiltrados = categoria === "Todos" ? 
-      prod 
-      : prod.filter((p) => p.categoria === categoria);
-  return (
-    <div className='itemListContainer'>
-      <div>
-        <button onClick={() => setCategoria("Todos")}>Todos los productos</button>
-        <button onClick={() => setCategoria("Mates")}>Mates</button>
-        <button onClick={() => setCategoria("Bombillas")}>Bombillas</button>
-        <button onClick={() => setCategoria("Yerbas")}>Yerbas</button>
-        <button onClick={() => setCategoria("Tes")}>Te & Inusiones</button>
-        <button onClick={() => setCategoria("Termos")}>Termos</button>
-      </div>
-      <Productos prod={productosFiltrados}/>
+    return () => { alive = false; }
+  }, [db, categoria]);
+
+  if (loading) return <p>Cargando productos...</p>
+  if (error) return <p>Error: {error}</p>
+  if (!productos.length) return <p>No hay productos disponibles.</p>
+    
+ return (
+    <div className="gridCards">
+    {productos.map((p) => {
+      const srcImg = p.imagen
+        ? new URL(`../../assets/${p.imagen}`, import.meta.url).href
+        : new URL(`../../assets/placeholder.png`, import.meta.url).href;
+      
+      return (
+        <article key={p.id} className="card">
+          <div className="imgWrap">
+            <img src={srcImg} alt={p.nombre || "Producto"} loading="lazy" />
+          </div>
+
+          <div className="cardBody">
+            <h2 className="cardTitle">{p.nombre ?? "Sin nombre"}</h2>
+            {p.caracteristica && (
+              <p className="cardDesc">{p.caracteristica}</p>
+            )}
+
+            <div className="cardFooter">
+              <span className="price">
+                ${Number(p.precio ?? 0).toLocaleString()}
+              </span>
+              <button className="btnPrimary" type="button" onClick={() => addItem(p, 1)}>
+                Agregar al carrito
+              </button>
+            </div>
+          </div>
+        </article>
+      );
+    })}
     </div>
   );
-}
+  }
+
 
 export default ItemListContainer
